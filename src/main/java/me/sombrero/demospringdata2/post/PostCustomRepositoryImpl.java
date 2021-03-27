@@ -20,4 +20,10 @@ public class PostCustomRepositoryImpl implements PostCustomRepository {
         return entityManager.createQuery("SELECT p FROM Post AS p", Post.class).getResultList();
     }
 
+    @Override
+    public void delete(Object entity) {
+        System.out.println("##### Custom delete!!");
+        entityManager.remove(entity);
+    }
+
 }

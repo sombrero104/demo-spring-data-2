@@ -165,7 +165,7 @@ class PostRepositoryTest {
 <br/><br/><br/><br/>
 
 ### 2. 스프링 데이터의 도메인 이벤트 Publisher
-
-
+스프링 데이터에서 이벤트 자동 퍼블리싱 기능을 제공해준다. (현재는 Repository를 save()할 때만 발생한다.)
+어떠한 엔티티에 쌓여있던 이벤트를 save()를 하는 순간 다 보내준다. 
 
 <br/><br/><br/><br/>

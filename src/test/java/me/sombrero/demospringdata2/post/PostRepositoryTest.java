@@ -41,7 +41,7 @@ class PostRepositoryTest {
         assertThat(postRepository.contains(post)).isFalse(); // Transient 상태.
 
         // postRepository.save(post);
-        postRepository.save(post.publish());
+        postRepository.save(post.publish()); // save를 하면 모아져있던 이벤트를 다 발생시킨다.
 
         assertThat(postRepository.contains(post)).isTrue(); // Persistent 상태.
 

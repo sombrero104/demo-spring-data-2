@@ -1,6 +1,9 @@
 # 스프링 데이터 JPA 2
 <br/>
 
+## 커스텀 Repository 만들기
+<br/>
+
 ### 1. 커스텀 Repository 만들기.  
 ### (커스텀 Repository를 매번 하나하나씩 추가로 만들어서 사용해야 하는 방법.)
 기본 JPA Repository의 기능 중 특정 기능을 사용하고 싶지 않은 경우, 내가 직접 만들고 싶은 경우.  
@@ -70,7 +73,7 @@ public interface PostRepository extends MyRepository❮Post, Long❯ {
 => MyRepository, MyRepositoryImpl, PostRepository 참조. 
 <br/><br/><br/><br/>
 
-### 도메인 이벤트 
+## 도메인 이벤트 
 도메인 클래스(Post.class와 같은)의 변화를 이벤트로 발생 시킨다. <br/>
 그리고 그 이벤트를 리스닝하는 리스너가 그 도메인 클래스의 변화를 감지하고 <br/>
 그러한 이벤트 기반의 프로그래밍을 할 수 있다. (어떤 이벤트가 발생했을 때 어떤 리스너의 코드를 실행하도록) <br/>
@@ -79,7 +82,9 @@ public interface PostRepository extends MyRepository❮Post, Long❯ {
 왜냐하면 ApplicationContext가 이미 이벤트 퍼블리셔이기 때문이다.  <br/>
 <pre>
 ApplicationContext extends ApplicationEventPublisher
-</pre>
+</pre><br/>
+
+### 1. 커스텀 이벤트, 이벤트 리스너 만들기. 
 아래는 커스텀한 이벤트, 이벤트 리스너를 만들어서 이벤트 발생 시 리스너가 잡아서 어떠한 일을 수행하는 것을 만든 것이다. 
 <pre>
 /**
@@ -157,5 +162,10 @@ class PostRepositoryTest {
 }
 </pre>
 => PostPublishedEvent, PostListener, PostRepositoryTestConfig. PostRepositoryTest 참조. 
+<br/><br/><br/><br/>
+
+### 2. 스프링 데이터의 도메인 이벤트 Publisher
+
+
 
 <br/><br/><br/><br/>

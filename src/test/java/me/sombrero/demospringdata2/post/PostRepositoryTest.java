@@ -40,7 +40,8 @@ class PostRepositoryTest {
 
         assertThat(postRepository.contains(post)).isFalse(); // Transient 상태.
 
-        postRepository.save(post);
+        // postRepository.save(post);
+        postRepository.save(post.publish());
 
         assertThat(postRepository.contains(post)).isTrue(); // Persistent 상태.
 

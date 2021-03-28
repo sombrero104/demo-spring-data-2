@@ -51,4 +51,12 @@ public class Post extends AbstractAggregateRoot<Post> {
         this.created = created;
     }
 
+    /**
+     * 이벤트를 만들어서 registerEvent()로 이벤트를 등록한다.
+     */
+    public Post publish() {
+        this.registerEvent(new PostPublishedEvent(this));
+        return this;
+    }
+
 }

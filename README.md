@@ -171,7 +171,7 @@ class PostRepositoryTest {
 이벤트를 다 보낸 다음 컬렉션에 있던 이벤트를 다 비우는데 자동으로 비워주는 메소드가 @AfterDomainEventPublication 이 붙은 메소드이다. <br/>
 즉, @DomainEvents는 이벤트를 모아놓는 곳, @AfterDomainEventPublication는 이벤트를 비우는 곳이다. <br/>
 이 두개의 메소드를 구현해야 하는데, 직접 구현할 필요없이 미리 구현해 놓은 AbstractAggregateRoot<E>를 (상속받아서) 사용하면 된다. <br/>
-이렇게 사용하면 위에서 처럼 우리가 직접 커스텀한 이벤트를 만들고 이벤트를 던지는 코딩을 할 필요가 없어진다. <br/>
+이렇게 사용하면 위에서 처럼 우리가 직접 ApplicationContext에 이벤트를 던지는 코딩을 할 필요가 없어진다. <br/>
 <pre>
 @Entity
 public class Post extends AbstractAggregateRoot❮Post❯ {

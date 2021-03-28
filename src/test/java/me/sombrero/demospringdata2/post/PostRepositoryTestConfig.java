@@ -1,5 +1,6 @@
 package me.sombrero.demospringdata2.post;
 
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,9 +13,21 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PostRepositoryTestConfig {
 
-    @Bean
+    /*@Bean
     public PostListener postListener() {
         return new PostListener();
+    }*/
+
+    @Bean
+    public ApplicationListener<PostPublishedEvent> postListener() {
+        return new ApplicationListener<PostPublishedEvent>() {
+            @Override
+            public void onApplicationEvent(PostPublishedEvent event) {
+                System.out.println("-----------------------------------");
+                System.out.println("##### [2] " + event.getPost().getTitle() + " is published!!");
+                System.out.println("-----------------------------------");
+            }
+        };
     }
 
 }

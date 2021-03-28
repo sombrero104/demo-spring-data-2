@@ -176,6 +176,21 @@ class PostRepositoryTest {
 @Entity
 public class Post extends AbstractAggregateRoot❮Post❯ {
     ...
+    /**
+     * 이벤트를 만들어서 registerEvent()로 이벤트를 등록한다.
+     */
+    public Post publish() {
+        this.registerEvent(new PostPublishedEvent(this));
+        return this;
+    }
+}
+</pre>
+<pre>
+@Test
+public void crud() {
+    ...
+    postRepository.save(post.publish()); // save를 하면 모아져있던 이벤트를 다 발생시킨다.
+    ...
 }
 </pre>
 <br/><br/><br/><br/>

@@ -1,10 +1,12 @@
 package me.sombrero.demospringdata2.post;
 
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Post {
+public class Post extends AbstractAggregateRoot<Post> {
 
     @Id @GeneratedValue
     private Long id;

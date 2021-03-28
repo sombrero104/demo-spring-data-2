@@ -1,7 +1,7 @@
 # 스프링 데이터 JPA 2
 <br/>
 
-# 커스텀 Repository 만들기 (커스텀 Repository를 매번 하나하나씩 추가로 만들어서 사용해야 하는 방법.)
+### 1. 커스텀 Repository 만들기 (커스텀 Repository를 매번 하나하나씩 추가로 만들어서 사용해야 하는 방법.)
 기본 JPA Repository의 기능 중 특정 기능을 사용하고 싶지 않은 경우, 내가 직접 만들고 싶은 경우.  
 <pre>
 public interface PostCustomRepository❮T❯ {
@@ -31,7 +31,7 @@ public interface PostRepository extends JpaRepository❮Post, Long❯, PostCusto
 => PostCustomRepository, PostCustomRepositoryImpl, PostRepository 참조.
 <br/><br/><br/><br/>
 
-# 기본 Repository 커스터마이징 (커스텀 Repository를 하나만 만들어서 사용하는 방법.)
+### 2. 기본 Repository 커스터마이징 (커스텀 Repository를 하나만 만들어서 사용하는 방법.)
 위에서 처럼 매번 커스텀 Repository 인터페이스와 구현체를 새로 만들지 않고, <br/>
 아예 JpaRepository와 JpaRepository의 기본 구현체인 SimpleJpaRepository를 상속받는<br/>
 커스텀 Repository 인터페이스와 구현체를 직접 하나만 만들어서 사용하는 방법이다. <br/>

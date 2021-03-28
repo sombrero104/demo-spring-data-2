@@ -12,6 +12,7 @@ public class PostListener implements ApplicationListener<PostPublishedEvent> {
     public void onApplicationEvent(PostPublishedEvent event) {
         System.out.println("-----------------------------------");
         System.out.println(event.getPost() + " is published!!");
+        System.out.println("-----------------------------------");
     }
 
 }

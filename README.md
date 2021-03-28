@@ -75,7 +75,7 @@ public interface PostRepository extends MyRepository❮Post, Long❯ {
 그리고 그 이벤트를 리스닝하는 리스너가 그 도메인 클래스의 변화를 감지하고 <br/>
 그러한 이벤트 기반의 프로그래밍을 할 수 있다. (어떤 이벤트가 발생했을 때 어떤 리스너의 코드를 실행하도록) <br/>
 '도메인 이벤트를 만든다. -> 이벤트를 퍼블리싱한다. -> 이벤트를 리스닝한다.' 이 과정을 직접 매뉴얼할 수 있다.(직접 만들 수 있다.) <br/>
-스프링 프레임워크에는 이러한 이벤트 퍼블리싱 기능이 이미 내재되어 있다.  <br/>
+기본적으로 모든 스프링 프레임워크에는 이러한 이벤트 퍼블리싱 기능이 이미 내재되어 있다.  <br/>
 왜냐하면 ApplicationContext가 이미 이벤트 퍼블리셔이기 때문이다.  <br/>
 <pre>
 ApplicationContext extends ApplicationEventPublisher

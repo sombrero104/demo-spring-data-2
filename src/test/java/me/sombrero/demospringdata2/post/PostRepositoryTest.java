@@ -25,6 +25,11 @@ class PostRepositoryTest {
         post.setTitle("Event :)");
         PostPublishedEvent event = new PostPublishedEvent(post); // 이벤트를 만든다.
         applicationContext.publishEvent(event); // ApplicationContext로 이벤트를 던진다.
+        /**
+         * PostRepositoryTestConfig에서 빈으로 등록된 커스텀 리스너인 PostListener를 import해서
+         * 위에서 ApplicationContext로 던진(publish한) 이벤트를
+         * PostListener가 잡아서 PostListener에 있는 onApplicationEvent() 메소드를 실행한다.
+         */
     }
 
     @Test

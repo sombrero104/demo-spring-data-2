@@ -1,7 +1,6 @@
 <br/>
 
-# 스프링 데이터 JPA 강의 2
-# 스프링 데이터 Common 
+# 스프링 데이터 JPA 강의 2 - 스프링 데이터 Common 
 <br/>
 
 ## 커스텀 Repository 만들기

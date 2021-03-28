@@ -2,6 +2,9 @@ package me.sombrero.demospringdata2.post;
 
 import java.util.List;
 
+/**
+ * [1] 하나하나 구현체를 만들어서 사용하는 방법.
+ */
 public interface PostCustomRepository<T> {
 
     List<Post> findMyPost();

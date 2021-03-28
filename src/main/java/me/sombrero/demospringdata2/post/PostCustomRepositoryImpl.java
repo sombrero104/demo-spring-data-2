@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * [1] 하나하나 구현체를 만들어서 사용하는 방법.
+ */
 @Repository
 @Transactional
 public class PostCustomRepositoryImpl implements PostCustomRepository {

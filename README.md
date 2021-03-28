@@ -80,5 +80,82 @@ public interface PostRepository extends MyRepository❮Post, Long❯ {
 <pre>
 ApplicationContext extends ApplicationEventPublisher
 </pre>
+아래는 커스텀한 이벤트, 이벤트 리스너를 만들어서 이벤트 발생 시 리스너가 잡아서 어떠한 일을 수행하는 것을 만든 것이다. 
+<pre>
+/**
+ * 이벤트를 발생시키는 곳이 Post라고 가정하고
+ * ApplicationEvent를 상속받는 이벤트 클래스를 만든다.
+ */
+public class PostPublishedEvent extends ApplicationEvent {
+
+    private final Post post;
+
+    public PostPublishedEvent(Object source) {
+        super(source);
+        this.post = (Post)source; // 이벤트를 발생시키는 곳이 Post라고 가정.
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+}
+</pre>
+<pre>
+public class PostListener implements ApplicationListener❮PostPublishedEvent❯ {
+
+    /**
+     * 도메인 클래스(Post.class와 같은)의 변화.. 즉 이벤트를 PostPublishedEvent 클래스로 만들고,
+     * PostPublishedEvent 이벤트가 발생했을 때 해야할 일들을 이곳에 작성한다.
+     */
+    @Override
+    public void onApplicationEvent(PostPublishedEvent event) {
+        System.out.println("-----------------------------------");
+        System.out.println(event.getPost().getTitle() + " is published!!");
+        System.out.println("-----------------------------------");
+    }
+
+}
+</pre>
+<pre>
+/**
+ * 이벤트 리스너 테스트(PostRepositoryTest)를 위해
+ * PostPublishedEvent 이벤트(도메인 클래스(Post.class와 같은)의 변화)를 감지하는
+ * 커스텀 리스너인 PostListener를 빈으로 등록해준다.
+ * PostRepositoryTest에서는 '@Import(PostRepositoryTestConfig.class)'해서 사용한다.
+ */
+@Configuration
+public class PostRepositoryTestConfig {
+
+    @Bean
+    public PostListener postListener() {
+        return new PostListener();
+    }
+
+}
+</pre>
+<pre>
+@DataJpaTest
+@Import(PostRepositoryTestConfig.class)
+class PostRepositoryTest {
+
+    @Autowired
+    ApplicationContext applicationContext;
+
+    @Test void event() {
+        Post post = new Post();
+        post.setTitle("Event :)");
+        PostPublishedEvent event = new PostPublishedEvent(post); // 이벤트를 만든다.
+        applicationContext.publishEvent(event); // ApplicationContext로 이벤트를 던진다.
+        /**
+         * PostRepositoryTestConfig에서 빈으로 등록된 커스텀 리스너인 PostListener를 import해서
+         * 위에서 ApplicationContext로 던진(publish한) 이벤트를
+         * PostListener가 잡아서 PostListener에 있는 onApplicationEvent() 메소드를 실행한다.
+         */
+    }
+    ...
+}
+</pre>
+=> PostPublishedEvent, PostListener, PostRepositoryTestConfig. PostRepositoryTest 참조. 
 
 <br/><br/><br/><br/>

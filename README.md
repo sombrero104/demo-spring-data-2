@@ -199,6 +199,7 @@ public void crud() {
 
 # QueryDSL
 <br/>
+
 ### * 여러 쿼리 메소드는 대부분 두 가지 중 하나이다. (QuerydslPredicateExecutor 인터페이스 참조.)
 - Optional❮T❯ findOne(Predicate): 이런 저런 조건으로 무언가 하나를 찾는다.
 - List❮T❯|Page❮T❯ findAll(Predicate): 이런 저런 조건으로 무언가 여러개를 찾는다.

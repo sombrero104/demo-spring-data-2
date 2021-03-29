@@ -198,6 +198,15 @@ public void crud() {
 <br/><br/><br/><br/>
 
 # QueryDSL
+쿼리를 자바 코드로 표현하는 방법.
+<pre>
+List❮Person❯ persons = queryFactory.selectFrom(person)
+  .where(
+    person.firstName.eq("John"),
+    person.lastName.eq("Doe"))
+  .fetch();
+</pre>
+http://www.querydsl.com
 <br/>
 
 ### 여러 쿼리 메소드는 대부분 두 가지 중 하나이다. (QuerydslPredicateExecutor 인터페이스 참조.)

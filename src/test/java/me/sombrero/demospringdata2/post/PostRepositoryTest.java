@@ -1,11 +1,14 @@
 package me.sombrero.demospringdata2.post;
 
+import com.querydsl.core.types.Predicate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.Import;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,16 +41,20 @@ class PostRepositoryTest {
         Post post = new Post();
         post.setTitle("Hibernate :D");
 
-        assertThat(postRepository.contains(post)).isFalse(); // Transient 상태.
+        // assertThat(postRepository.contains(post)).isFalse(); // Transient 상태.
 
         // postRepository.save(post);
         postRepository.save(post.publish()); // save를 하면 모아져있던 이벤트를 다 발생시킨다.
 
-        assertThat(postRepository.contains(post)).isTrue(); // Persistent 상태.
+        // assertThat(postRepository.contains(post)).isTrue(); // Persistent 상태.
 
         // postRepository.findMyPost();
-        postRepository.delete(post); // 테스트 코드이기 때문에 어차피 롤백이라 무시된다.
-        postRepository.flush();
+        // postRepository.delete(post); // 테스트 코드이기 때문에 어차피 롤백이라 무시된다.
+        // postRepository.flush();
+
+        Predicate predicate = QPost.post.title.containsIgnoreCase("Hi");
+        Optional<Post> one = postRepository.findOne(predicate);
+        assertThat(one).isNotEmpty();
     }
 
 }

@@ -214,6 +214,9 @@ http://www.querydsl.com
 - List❮T❯|Page❮T❯|etc.. findAll(Predicate): 이런 저런 조건으로 무언가 여러개를 찾는다.
 <br/><br/><br/><br/>
 
+# Web 1부: 웹 지원 기능 소개 
+<br/>
+
 ## @ProjectedPayload 
 요청으로 들어오는 JSON 또는 XML 데이터에 일부만 캡쳐해서 바인딩 받을 수 있는 기능. <br/>
 예를 들어, 요청의 JSON에 firstname, lastname 등등 여러 정보들이 들어올 때<br/>

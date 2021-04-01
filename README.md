@@ -212,4 +212,48 @@ http://www.querydsl.com
 ### 여러 쿼리 메소드는 대부분 두 가지 중 하나이다. (QuerydslPredicateExecutor 인터페이스 참조.)
 - Optional❮T❯ findOne(Predicate): 이런 저런 조건으로 무언가 하나를 찾는다.
 - List❮T❯|Page❮T❯|etc.. findAll(Predicate): 이런 저런 조건으로 무언가 여러개를 찾는다.
-<br/>
+<br/><br/><br/><br/>
+
+# @ProjectedPayload 
+요청으로 들어오는 JSON 또는 XML 데이터에 일부만 캡쳐해서 바인딩 받을 수 있는 기능. <br/>
+예를 들어, 요청의 JSON에 firstname, lastname 등등 여러 정보들이 들어올 때<br/>
+그 중에서 firstname, lastname만 받고 싶을 경우 아래와 같이 작성한다. 
+<pre>
+@ProjectedPayload
+public interface UserPayload {
+	@XBRead("//firstname")
+	@JsonPath("$..firstname")
+	String getFirstname();
+
+	@XBRead("//lastname")
+	@JsonPath("$..lastname")
+	String getLastname();
+}
+</pre>
+<pre>
+private void postAndExpect(String payload, MediaType mediaType) throws Exception {
+    ResultActions actions = mvc.perform(post("/")//
+            .content(payload)//
+            .contentType(mediaType))//
+            .andExpect(status().isOk());
+
+    actions.andExpect(content().string(containsString("Dave")));
+    actions.andExpect(content().string(containsString("Matthews")));
+}
+</pre>
+<pre>
+@PostMapping(value = "/")
+HttpEntity❮String❯ post(@RequestBody UserPayload user) {
+    return ResponseEntity
+            .ok(String.format("Received firstname: %s, lastname: %s", user.getFirstname(), user.getLastname()));
+}
+</pre>
+https://github.com/spring-projects/spring-data-examples/tree/master/web/projection <br/>
+<br/><br/><br/><br/>
+
+
+
+
+
+https://docs.spring.io/spring-data/commons/docs/2.4.7/reference/html/#reference
+<br/><br/><br/><br/>

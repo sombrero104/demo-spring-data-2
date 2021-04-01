@@ -1,6 +1,7 @@
 package me.sombrero.demospringdata2.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
@@ -19,9 +20,14 @@ public class PostController {
         return post.getTitle();
     }
 
+    /**
+     * PagedResourcesAssembler를 사용하면
+     * 페이지 정보뿐만 아니라 링크 정보도 같이 응답으로 만들어서 보내준다. (HATEOAS)
+     */
     @GetMapping("/posts")
     public PagedModel<Post> getPosts(Pageable pageable, PagedResourcesAssembler assembler) {
-        return assembler.toModel(postRepository.findAll(pageable));
+        Page<Post> all = postRepository.findAll(pageable);
+        return assembler.toModel(all);
     }
 
 }

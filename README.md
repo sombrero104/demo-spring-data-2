@@ -230,6 +230,7 @@ public interface UserPayload {
 	String getLastname();
 }
 </pre>
+아래와 같이 데이터를 보내고, 
 <pre>
 private void postAndExpect(String payload, MediaType mediaType) throws Exception {
     ResultActions actions = mvc.perform(post("/")//
@@ -241,6 +242,7 @@ private void postAndExpect(String payload, MediaType mediaType) throws Exception
     actions.andExpect(content().string(containsString("Matthews")));
 }
 </pre>
+위에서 정의한 UserPayload로 바인딩을 받는다. 
 <pre>
 @PostMapping(value = "/")
 HttpEntity❮String❯ post(@RequestBody UserPayload user) {
